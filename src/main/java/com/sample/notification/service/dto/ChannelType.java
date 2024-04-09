@@ -1,6 +1,6 @@
 package com.sample.notification.service.dto;
 
-public enum ChannelTypes {
+public enum ChannelType {
     EMAIL,
     SLACK,
     MSTeams,

@@ -1,6 +1,7 @@
 package com.sample.notification.service.controller;
 
 
+import com.sample.notification.service.dto.ChannelType;
 import com.sample.notification.service.dto.Notification;
 import com.sample.notification.service.monitoring.HealthService;
 import com.sample.notification.service.proxy.ChannelProxy;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationController {
 
 
-
-
     private final HealthService healthService;
     private final ChannelProxy channel;
 
@@ -24,14 +23,18 @@ public class NotificationController {
     }
 
     public ResponseEntity<String> sendNotification(Notification notification) {
-        switch (healthService.notifyHealth(notification.getChannelTypes())) {
-            case UP:
-                channel.send(notification);
-                break;
-            case DOWN:
-                return new ResponseEntity<>("Notification failed", HttpStatus.INTERNAL_SERVER_ERROR);
-            default:
-                return new ResponseEntity<>("Notification failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        for (ChannelType channelType : notification.getChannelTypes()) {
+            switch (healthService.notifyHealth(channelType)) {
+                case UP:
+                    channel.send(channelType, notification.getMessage());
+                    break;
+                case DOWN:
+                    continue;
+                case UNKNOWN:
+                    break;
+                default:
+                    continue;
+            }
         }
 
 
