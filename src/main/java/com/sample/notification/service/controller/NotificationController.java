@@ -7,10 +7,13 @@ import com.sample.notification.service.monitoring.HealthService;
 import com.sample.notification.service.proxy.ChannelProxy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/notification")
 public class NotificationController {
 
 
@@ -22,6 +25,7 @@ public class NotificationController {
         this.channel = channel;
     }
 
+    @RequestMapping("/send")
     public ResponseEntity<String> sendNotification(Notification notification) {
         for (ChannelType channelType : notification.getChannelTypes()) {
             switch (healthService.notifyHealth(channelType)) {
@@ -38,6 +42,11 @@ public class NotificationController {
         }
 
 
+        return new ResponseEntity<>("Notification sent successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/notifytest")
+    public ResponseEntity<String> testService() {
         return new ResponseEntity<>("Notification sent successfully", HttpStatus.OK);
     }
 
