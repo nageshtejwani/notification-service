@@ -1,15 +1,19 @@
 package com.sample.notification.service.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
-@AllArgsConstructor
+
+
 @NoArgsConstructor
-@Data
+@ToString
+@Getter
+@Setter
 public class Message {
-    private String message;
+    private String body; ;
     private String subject;
     private String toEmail;
     private String slackChannel;

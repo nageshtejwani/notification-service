@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class SMS implements Channel{
     @Override
     public void send(Message message) {
-        System.out.println("SMS sent: " + message.getMessage());
+        System.out.println("SMS sent: " + message.getBody());
 
     }
 

@@ -1,16 +1,17 @@
 package com.sample.notification.service.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
+import lombok.ToString;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class Notification {
     private Message message;
-    List<ChannelType> channelTypes;
+    private List<ChannelType> channelTypes;
 }

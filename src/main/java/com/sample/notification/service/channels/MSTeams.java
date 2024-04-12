@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class MSTeams implements Channel{
     @Override
     public void send(Message message) {
-        System.out.println("MSTeams sent: " + message.getMessage());
+        System.out.println("MSTeams sent: " + message.getBody());
 
     }
 

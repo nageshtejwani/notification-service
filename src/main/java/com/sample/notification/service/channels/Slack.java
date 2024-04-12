@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Slack implements Channel{
     @Override
     public void send(Message message) {
-        System.out.println("Slack sent: " + message.getMessage());
+        System.out.println("Slack sent: " + message.getBody());
 
     }
 

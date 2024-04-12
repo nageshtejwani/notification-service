@@ -20,7 +20,7 @@ public class Email implements Channel {
         simpleMessage.setFrom("abc@gmail.com");
         simpleMessage.setTo(message.getToEmail());
         simpleMessage.setSubject(message.getSubject());
-        simpleMessage.setText(message.getMessage());
+        simpleMessage.setText(message.getBody());
         email.send(simpleMessage);
     }
 }
