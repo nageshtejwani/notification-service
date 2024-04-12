@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: notifictaion-service
+    mail:
+        host: localhost
+        password: password
+        port: 1025
+        properties:
+            mail:
+                smtp:
+                    auth: false
+                    starttls:
+                        enable: false
+        username: sender@test.com
+    
+slack:
+    webhook-url: https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX
