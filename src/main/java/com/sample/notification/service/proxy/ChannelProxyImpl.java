@@ -16,7 +16,8 @@ public class ChannelProxyImpl implements ChannelProxy {
     private final Channel msTeams;
 
     @Autowired
-    public ChannelProxyImpl(@Qualifier("email") Channel email, @Qualifier("discord") Channel discord, @Qualifier("slack") Channel slack, @Qualifier("msteams") Channel msTeams) {
+    public ChannelProxyImpl(@Qualifier("email") Channel email,
+                            @Qualifier("discord") Channel discord, @Qualifier("slack") Channel slack, @Qualifier("msteams") Channel msTeams) {
         this.email = email;
         this.discord = discord;
         this.slack = slack;
