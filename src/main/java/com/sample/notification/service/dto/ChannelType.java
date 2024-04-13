@@ -4,6 +4,6 @@ public enum ChannelType {
     EMAIL,
     SLACK,
     MSTeams,
-    SMS;
+    DISCORD;
 
 }

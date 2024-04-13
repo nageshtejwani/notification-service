@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 public class ChannelProxyImpl implements ChannelProxy {
 
     private final Channel email;
-    private final Channel sms;
+    private final Channel discord;
     private final Channel slack;
     private final Channel msTeams;
 
     @Autowired
-    public ChannelProxyImpl(@Qualifier("email") Channel email, @Qualifier("sms") Channel sms, @Qualifier("slack") Channel slack, @Qualifier("msteams") Channel msTeams) {
+    public ChannelProxyImpl(@Qualifier("email") Channel email, @Qualifier("discord") Channel discord, @Qualifier("slack") Channel slack, @Qualifier("msteams") Channel msTeams) {
         this.email = email;
-        this.sms = sms;
+        this.discord = discord;
         this.slack = slack;
         this.msTeams = msTeams;
     }
@@ -29,8 +29,8 @@ public class ChannelProxyImpl implements ChannelProxy {
             case EMAIL:
                 email.send(message);
                 break;
-            case SMS:
-                sms.send(message);
+            case DISCORD:
+                discord.send(message);
                 break;
             case SLACK:
                 slack.send(message);
