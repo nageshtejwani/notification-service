@@ -5,5 +5,6 @@
 
 ## Architecture 
 
-![image](https://github.com/nageshtejwani/notification-service/assets/39427545/1f22c8da-f0c1-4510-be6f-42aef0c9146e)
+![image](https://github.com/nageshtejwani/notification-service/assets/39427545/e43cf833-9379-41d8-8e19-34a996682e11)
+
 
