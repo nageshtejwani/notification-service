@@ -3,6 +3,7 @@ package com.sample.notification.service.channels;
 import com.sample.notification.service.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -20,8 +21,12 @@ public class Discord implements Channel{
 
     private final WebClient webClient;
 
-    public Discord(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://discord.com/api/webhooks/your/webhook/id/your/webhook/token").build();// Needs to fix with the yaml value
+
+
+    public Discord(@Value("${channels.discord.webhook-url}") String url) {
+        this.webClient = WebClient.builder()
+                .baseUrl(url)
+                .build();
     }
 
     @Override

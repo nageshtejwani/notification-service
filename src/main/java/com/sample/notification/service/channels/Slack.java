@@ -3,6 +3,7 @@ package com.sample.notification.service.channels;
 import com.sample.notification.service.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -17,8 +18,10 @@ public class Slack implements Channel {
     private final WebClient webClient;
 
 
-    public Slack(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX").build();// Needs to fix with the yaml value
+    public Slack(@Value("${channels.slack.webhook-url}") String url) {
+        this.webClient = WebClient.builder()
+                .baseUrl(url)
+                .build();
     }
 
     @Override

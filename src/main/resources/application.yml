@@ -13,5 +13,8 @@ spring:
                         enable: false
         username: sender@test.com
     
-slack:
-    webhook-url: https://hooks.slack.com/services/XXXXX/XXXXX/XXXXX
+channels:
+    slack:
+        webhook-url: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+    discord:
+        webhook-url: https://discord.com/api/webhooks/000000000000000000/

@@ -13,11 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Message {
-    private String body; ;
+    private String body;
     private String subject;
     private String toEmail;
-    private String slackChannel;
-    private String cellNummber;
-    private String msteamsChannel;
-
 }
