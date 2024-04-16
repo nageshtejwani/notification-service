@@ -1,6 +1,5 @@
 package com.sample.notification.service.controller;
 
-
 import com.sample.notification.service.channels.factory.ChannelBeanFactory;
 import com.sample.notification.service.dto.ChannelType;
 import com.sample.notification.service.dto.Notification;
@@ -13,16 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationController.class);
-
 
     private final ChannelBeanFactory channelBeanFactory;
 
@@ -31,13 +29,11 @@ public class NotificationController {
     }
 
     @RequestMapping("/send")
-    public ResponseEntity<String> sendNotification( @RequestBody Notification notification) {
+    public Mono<ResponseEntity<String>> sendNotification(@RequestBody Notification notification) {
         LOGGER.info("Sending notification: {}", notification);
-        for (ChannelType channelType : notification.getChannelTypes()) {
-            channelBeanFactory.getChannelTypeBean(channelType).send(notification.getMessage());
-
-        }
-        return new ResponseEntity<>("Notification sent successfully", HttpStatus.OK);
+        return Flux.fromIterable(notification.getChannelTypes())
+                .flatMap(channelType -> Mono.fromRunnable(() -> channelBeanFactory.getChannelTypeBean(channelType).send(notification.getMessage())))
+                .then(Mono.just(new ResponseEntity<>("Notification sent successfully", HttpStatus.OK)));
     }
 
     @GetMapping("/notifytest")
