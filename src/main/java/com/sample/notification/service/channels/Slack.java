@@ -1,5 +1,7 @@
 package com.sample.notification.service.channels;
 
+import com.sample.notification.service.channels.handler.ChannelBeanHandler;
+import com.sample.notification.service.dto.ChannelType;
 import com.sample.notification.service.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component("slack")
+@ChannelBeanHandler(type = ChannelType.SLACK)
 public class Slack implements Channel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Slack.class);

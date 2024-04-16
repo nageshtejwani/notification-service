@@ -1,5 +1,7 @@
 package com.sample.notification.service.channels;
 
+import com.sample.notification.service.channels.handler.ChannelBeanHandler;
+import com.sample.notification.service.dto.ChannelType;
 import com.sample.notification.service.dto.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.net.URI;
-
 
 @Component("discord")
+@ChannelBeanHandler(type = ChannelType.DISCORD)
+
 public class Discord implements Channel{
     /**
      * @param message
