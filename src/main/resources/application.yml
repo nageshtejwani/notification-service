@@ -14,11 +14,11 @@ spring:
         username: sender@test.com
     data:
         mongodb:
-            database: local
-            host: localhost
-            port: 27017
+           uri: mongodb://mongo:27017
+           database: notification-service
+
 channels:
     slack:
-        webhook-url: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXX
+        webhook-url: https://hooks.slack.com/services/
     discord:
-        webhook-url: https://discord.com/api/webhooks/000000000000000000/
+        webhook-url: https://discord.com/api/webhooks/

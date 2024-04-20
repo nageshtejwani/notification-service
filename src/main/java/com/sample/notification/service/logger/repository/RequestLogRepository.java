@@ -19,11 +19,12 @@ public class RequestLogRepository {
 
     private final MongoCollection<RequestLog> requestLogCollection;
 
-    public RequestLogRepository(@Value("${spring.data.mongodb.database}") String databaseName) {
+    public RequestLogRepository(@Value("${spring.data.mongodb.uri}") String mongoUri,
+                                @Value("${spring.data.mongodb.database}") String databaseName) {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-        MongoClient mongoClient = MongoClients.create();
+        MongoClient mongoClient = MongoClients.create(mongoUri);
         MongoDatabase database = mongoClient.getDatabase(databaseName).withCodecRegistry(pojoCodecRegistry);
         this.requestLogCollection = database.getCollection("requestLogs", RequestLog.class);
     }
