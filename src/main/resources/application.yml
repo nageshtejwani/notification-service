@@ -12,9 +12,13 @@ spring:
                     starttls:
                         enable: false
         username: sender@test.com
-    
+    data:
+        mongodb:
+            database: local
+            host: localhost
+            port: 27017
 channels:
     slack:
-        webhook-url: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+        webhook-url: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXX
     discord:
         webhook-url: https://discord.com/api/webhooks/000000000000000000/
