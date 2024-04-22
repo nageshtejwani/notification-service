@@ -15,7 +15,7 @@
 ##### Please set uppropriate configuration for channels ,Webhooks for Slack,Discord etc and configuration for email
 docker compose build
 
-## RUN 
+## Run 
 
 docker-compose up 
 
