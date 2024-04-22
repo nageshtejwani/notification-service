@@ -1,6 +1,6 @@
 # Notification Service
   #### This service can works as independent component for sending message for channels like Email,Slack etc.
-  #### It is async in nature and retries can be acievables it logs the request in mongo db 
+  #### It is async in nature and retries can be achievable as it logs the request in mongo db 
 
 # Supported Channels 
    1. Email
