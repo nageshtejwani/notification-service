@@ -1,23 +1,21 @@
 package com.sample.notification.service.controller;
 
 import com.sample.notification.service.channels.factory.ChannelBeanFactory;
-import com.sample.notification.service.dto.ChannelType;
 import com.sample.notification.service.dto.Notification;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
 @RequestMapping("/notification")
+@CrossOrigin(origins = "http://localhost:3000")
 public class NotificationController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationController.class);
@@ -29,6 +27,7 @@ public class NotificationController {
     }
 
     @RequestMapping("/send")
+    @Operation(summary = "Sending Notification", description = "Send notification to multiple channels")
     public Mono<ResponseEntity<String>> sendNotification(@RequestBody Notification notification) {
         LOGGER.info("Sending notification: {}", notification);
         return Flux.fromIterable(notification.getChannelTypes())
