@@ -1,7 +1,9 @@
 package com.sample.notification.service.controller;
 
 import com.sample.notification.service.channels.factory.ChannelBeanFactory;
+import com.sample.notification.service.channels.service.RequestLogService;
 import com.sample.notification.service.dto.Notification;
+import com.sample.notification.service.logger.RequestLog;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/notification")
@@ -21,9 +25,11 @@ public class NotificationController {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationController.class);
 
     private final ChannelBeanFactory channelBeanFactory;
+    private final RequestLogService requestLogService;
 
-    public NotificationController(ChannelBeanFactory channelBeanFactory) {
+    public NotificationController(ChannelBeanFactory channelBeanFactory, RequestLogService requestLogService) {
         this.channelBeanFactory = channelBeanFactory;
+        this.requestLogService = requestLogService;
     }
 
     @RequestMapping("/send")
@@ -38,6 +44,11 @@ public class NotificationController {
     @GetMapping("/notifytest")
     public ResponseEntity<String> testService() {
         return new ResponseEntity<>("Notification sent successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/requestLogs")
+    public List<RequestLog> getRequestLogs() {
+        return requestLogService.findAll();
     }
 
 }

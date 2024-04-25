@@ -11,6 +11,9 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -31,5 +34,9 @@ public class RequestLogRepository {
 
     public void save(RequestLog requestLog) {
         requestLogCollection.insertOne(requestLog);
+    }
+
+    public List<RequestLog> findAll() {
+        return requestLogCollection.find().into(new ArrayList<>());
     }
 }
